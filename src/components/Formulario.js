@@ -6,9 +6,15 @@ import Typography from "@material-ui/core/Typography";
 import { Box, TextField, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+
 const useStyles = makeStyles({
   marginTitle: {
     marginBottom: "20px",
+  },
+  boxa : {
+    "@media (max-width: 968px)": {
+        marginTop : "26px"
+    }
   },
   marginSubTitle: {
     marginBottom: "15px",
@@ -16,22 +22,29 @@ const useStyles = makeStyles({
   input: {
      width : "150px",
      border : "none",
+      outline: "none",
+     backgroundColor : "#f2f2f2",
+     "@media (max-width: 500px)": {
 
-     backgroundColor : "#f2f2f2"
+      width: "100px"
+  }
+
   },
   send : {
+    height: "40px",
     border : "none",
-    borderRadius: "0px 30px 30px 0px",
+    borderRadius: "0px 5px 5px 0px",
     padding : "0 15px",
     color : "#f2f2f2",
-      backgroundColor : "#3f51b5"
+      backgroundColor : "#4365c3",
+      cursor : "pointer"
   },
   div : {
       
-      padding : "5px 5px 5px 14px",
-      borderRadius: "30px 0px 0px 30px",
+      padding : "5px 5px 5px 8px",
+      borderRadius: "5px 0px 0px 5px",
       color : "white",
-      backgroundColor : "#3f51b5"
+      backgroundColor : "#4365c3"
       
   },
   button : {
@@ -60,10 +73,14 @@ const useStyles = makeStyles({
     left: "50%",
     top: "50%",
     transform: "translate(-50%, -50%)",
-   
+    
     padding: "150px",
-    backgroundColor: "#fff",
-    boxShadow: "0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2)"
+   
+
+    "@media (max-width: 500px)": {
+
+      width: "90%"
+  }
   },
 });
 
@@ -124,7 +141,7 @@ const Formulario = ({ guardarUrlReact }) => {
             </Box>
           </Grid>
           <Grid item xs={12} md={4} className={classes.border}>
-            <Box width="100%" m="auto">
+            <Box className={classes.boxa} width="100%" m="auto" >
               <div className="form-containter" >
                 <Typography
                   variant="h4"
@@ -144,8 +161,8 @@ const Formulario = ({ guardarUrlReact }) => {
                     Clip.netlify.app/
                     </Typography>
                     </div>
-              <input className={classes.input} onChange={cambiaUrl}></input>
-              <button className={classes.send} type="submit" onClick={sendUrl}>  <Link className={classes.a} size="small" to={`/${url}`}>Ir</Link></button>
+              <input type="text" className={classes.input} onChange={cambiaUrl} required/>
+              <Link className={classes.a} to={`/${url}`}> <button className={classes.send} type="submit" onClick={() => guardarUrlReact(url)}> <span>Ir</span></button></Link>
             </Box>
 
                 </form>
