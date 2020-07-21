@@ -8,20 +8,17 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import styled from "styled-components";
 import { keyframes } from "styled-components";
-import { createMuiTheme } from '@material-ui/core/styles';
-
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
-  
-    palette: {
-      primary: {
-        main: '#1e88e5',
-      },
-      secondary: {
-        main: '#fff',
-      },
-    }
-  
+  palette: {
+    primary: {
+      main: "#1e88e5",
+    },
+    secondary: {
+      main: "#fff",
+    },
+  },
 });
 
 const useStyles = makeStyles({
@@ -30,10 +27,9 @@ const useStyles = makeStyles({
     fontWeight: "500",
   },
   textFieldOut: {
-    color: theme.palette.secondary.main
-  }
-  });
-
+    color: theme.palette.secondary.main,
+  },
+});
 
 const activeAnim = keyframes`
  
@@ -55,10 +51,22 @@ const ContenedorPrincipal = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -55%);
 
   @media (max-width: 900px) {
     width: 95%;
+  }
+`;
+
+const Titulo = styled.h1`
+  font-family: Inter, sans serif;
+  color: rgb(31, 31, 48);
+  font-size: 35px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+  @media (max-width:600px) {
+    font-size: 35px;
   }
 `;
 
@@ -72,7 +80,9 @@ const ContenedorButtons = styled.div`
 `;
 
 const ButtonActive = styled.button`
-  background-color: #4365c3;
+font-family: Inter;
+font-weight:bold;
+  background-color: #285ce2;
   transition: background-color 0.15s cubic-bezier(0.31, -0.105, 0.43, 1.4);
   border-radius: 3px;
   border: none;
@@ -92,7 +102,9 @@ const ButtonActive = styled.button`
 `;
 
 const ButtonActive2 = styled.button`
-  background-color: #4365c3;
+font-family: Inter;
+font-weight:bold;
+  background-color: #285ce2;
   transition: background-color 0.15s cubic-bezier(0.31, -0.105, 0.43, 1.4);
   border-radius: 3px;
   animation-duration: 0.2s;
@@ -127,14 +139,13 @@ const Copia = ({ urlReact, guardarCopiaSave }) => {
 
   useEffect(() => {
     const copiaValue = async () => {
-      console.log(urlReact);
       const respuesta = await clienteAxios.get("/api/copias", {
         params: { url: urlReact },
       });
       if (respuesta.data != null) {
         guardarCopia(respuesta.data.copia);
         guardarUsuario(false);
-        console.log(respuesta.data.expireAt);
+
         if (respuesta.data.expireAt === undefined) {
           guardarUsuarioExistente(respuesta.data);
           deleteCopia(respuesta.data);
@@ -199,16 +210,11 @@ const Copia = ({ urlReact, guardarCopiaSave }) => {
   return (
     <ContenedorPrincipal>
       {/*  <Box width="60%" m="auto" p={10} > */}
-      <Typography
-        className={classes.textPadding}
-        variant="h5"
-        align="center"
-        color="initial"
-        m={6}
-        gutterBottom
-      >
-        Portapapeles online.
-      </Typography>
+   
+        <Titulo>
+          {usuarioNuevo ?  "Pega aqui lo que quieras." : "Aqui estan tus cosas"}
+        </Titulo>
+      
 
       <form onSubmit={enviaCopia} method="POST">
         <TextField
@@ -220,6 +226,7 @@ const Copia = ({ urlReact, guardarCopiaSave }) => {
           value={copia}
           multiline="true"
           fullWidth="true"
+          rows={8}
           m={2}
           className={classes.textFieldOut}
         />
@@ -234,7 +241,7 @@ const Copia = ({ urlReact, guardarCopiaSave }) => {
               fullWidth="true"
             >
               <MenuItem value="">
-                <em>Borrar cuando sea visto</em>
+                Borrar cuando sea visto
               </MenuItem>
               <MenuItem value={"1h"}>Borrar en 1 hora</MenuItem>
               <MenuItem value={"1s"}>Borrar en 1 semana</MenuItem>

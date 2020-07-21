@@ -11,7 +11,7 @@ const ContenedorPrincipal = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: auto;
-  width: 800px;
+  width: 850px;
   height: 500px;
   position: absolute;
   top: 50%;
@@ -25,7 +25,31 @@ const ContenedorPrincipal = styled.div`
   }
 `;
 
+const Titulo = styled.h1`
+  font-family: Inter, sans serif;
+  color: rgb(31, 31, 48);
+  font-size: 40px;
+  text-align: left;
+  width: 100%;
+  @media (max-width:600px) {
+    text-align:center;
+  }
+`;
+
+const SubTitulo = styled.p`
+  font-family: Inter, sans serif;
+  color: rgb(31, 31, 48);
+  font-size: 18px;
+  text-align: left;
+  width: 100%;
+  @media (max-width:600px) {
+    text-align:center;
+  }
+  line-height:1.8;
+`;
+
 const ContenedorFlex = styled.div`
+  max-width:600px;
   @media (max-width: 800px) {
     display: flex;
     flex-direction: column;
@@ -50,6 +74,10 @@ const useStyles = makeStyles({
     left: "50%",
     transform: "translate(-50%,-50%)",
   },
+  qr : {
+    width: "100%",
+    maxWidth:"200px"
+  }
 });
 
 const Terminado = ({ urlReact }) => {
@@ -57,20 +85,20 @@ const Terminado = ({ urlReact }) => {
   return (
     <ContenedorPrincipal>
       <ContenedorFlex>
-        <Typography variant="h4" className={classes.marginTitle}>
+        <Titulo>
           Su copia se ha guardado.
-        </Typography>
-        <Typography variant="subtitle1" className={classes.marginSubTitle}>
+          </Titulo>
+        <SubTitulo>
           Puede acceder a ella desde otra pc o cualquier dispositivo desde{" "}
           <br />
           <strong>{`https://copi.netlify.app/${urlReact}`}</strong>
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
+          </SubTitulo>
+        <SubTitulo>
           QR code disponible.
-        </Typography>
+          </SubTitulo>
       </ContenedorFlex>
       <ContenedorFlex>
-        <QRCode size="180" value={`http://copi.netlify.app/${urlReact}`} />
+        <QRCode size="190" className={classes.qr} value={`https://copi.netlify.com/${urlReact}/`} />
       </ContenedorFlex>
     </ContenedorPrincipal>
   );
